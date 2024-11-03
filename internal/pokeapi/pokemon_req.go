@@ -12,7 +12,6 @@ func (c *Client) PokemonReq(pokemonName string) (PokemonResponse, error) {
 	fullURL := baseURL + "/pokemon/" + pokemonName
 
 	if cacheData, ok := c.cache.Get(fullURL); ok {
-		fmt.Println("cache hit!!!")
 		resp := PokemonResponse{}
 		err := json.Unmarshal(cacheData, &resp)
 		if err != nil {
