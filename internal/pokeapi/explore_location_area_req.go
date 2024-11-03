@@ -9,6 +9,8 @@ import (
 
 func (c *Client) ExploreLocationArea(location string) (ExploreLocationAreaResponse, error) {
 
+	
+
 	fullURL := baseURL + "/location-area/" + location
 
 	if cacheData, ok := c.cache.Get(fullURL); ok {
@@ -43,11 +45,11 @@ func (c *Client) ExploreLocationArea(location string) (ExploreLocationAreaRespon
 
 	c.cache.Add(fullURL, data)
 
-	locAreaResponse := ExploreLocationAreaResponse{}
-	err = json.Unmarshal(data, &locAreaResponse)
+	resp := ExploreLocationAreaResponse{}
+	err = json.Unmarshal(data, &resp)
 	if err != nil {
 		return ExploreLocationAreaResponse{}, err
 	}
 
-	return locAreaResponse, nil
+	return resp, nil
 }

@@ -24,9 +24,12 @@ func startRepl(cfg *config) {
 		}
 
 		commandName := cleanText[0]
+
+		cfg.word2 = ""
 		if len(cleanText) == 2 {
 			cfg.word2 = cleanText[1]
 		}
+
 		availableCommands := getCommands()
 		command, ok := availableCommands[commandName]
 		if !ok {
@@ -50,8 +53,23 @@ type cliCommand struct {
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
+		"inspect": {
+			name:        "inspect {pokemon-name}",
+			description: "Prints the name, height, weight, stats and type(s) of the pokemon. If user has caught pokemon.",
+			callback:    callbackInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Prints all pokemon in pokedex by name",
+			callback:    callbackPokedex,
+		},
+		"catch": {
+			name:        "catch {pokemon-name}",
+			description: "Attemps to catch pokemon! If caught pokemon will be added to pokedex",
+			callback:    callbackCatch,
+		},
 		"explore": {
-			name:        "explore",
+			name:        "explore {location-area}",
 			description: "Shows Pokemon located at specified area",
 			callback:    callbackExplore,
 		},

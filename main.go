@@ -9,15 +9,16 @@ type config struct {
 	NextLocationArea *string
 	PrevLocationArea *string
 	word2 string
+	pokedex Pokedex
 }
 
 func main() {
-
 	cfg := config{
 		pokeapiClient:    pokeapi.NewClient(),
 		NextLocationArea: nil,
 		PrevLocationArea: nil,
 		word2: "",
+		pokedex: newPokedex(),
 	}
 	startRepl(&cfg)
 }
